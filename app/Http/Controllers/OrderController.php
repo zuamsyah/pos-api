@@ -36,7 +36,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = Order::orderBy('created_at', 'DESC')->paginate(5);
+        $orders = Auth::user()->Order()->orderBy('created_at', 'DESC')->paginate(5);
      
         return $this->respondWithCollection($orders, $this->orderTransformer);
     }

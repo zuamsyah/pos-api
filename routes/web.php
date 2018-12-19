@@ -49,6 +49,10 @@ $router->group(['prefix' => 'api/v1'], function() use ($router) {
       	$router->get('pembelian', 'OrderController@index');
       	$router->post('pembelian', 'OrderController@store');
 		$router->patch('pembelian/{id}', 'OrderController@update');
+
+		$router->get('penjualan', 'SalesController@index');
+      	$router->post('penjualan', 'SalesController@store');
+		$router->patch('penjualan/{id}', 'SalesController@update');
 		
 		$router->get('laporanpembelian', 'OrderDetailController@getOrderReport');
 		$router->get('laporanstokbarang', 'ProductController@getStockReport');

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use League\Fractal\Manager;
 use League\Fractal\Resource\Item;

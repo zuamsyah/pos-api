@@ -11,6 +11,7 @@ use League\Fractal\Manager;
 use League\Fractal\TransformerAbstract;
 use App\Transformers\ProductTransformer;
 use App\Transformers\MutationTransformer;
+use App\Transformers\StockProductTransformer;
 use App\Product;
 
 class ProductController extends Controller
@@ -21,11 +22,14 @@ class ProductController extends Controller
 
 	private $mutationTransformer;
 
-	public function __construct(Manager $fractal, ProductTransformer $productTransformer, MutationTransformer $mutationTransformer)
+	private $stockProductTransformer;
+
+	public function __construct(Manager $fractal, ProductTransformer $productTransformer, MutationTransformer $mutationTransformer, StockProductTransformer $stockProductTransformer)
 	{
 		$this->fractal = $fractal;
 		$this->productTransformer = $productTransformer;
 		$this->mutationTransformer = $mutationTransformer;
+		$this->stockProductTransformer = $stockProductTransformer;
 	}
 
 	public function index()
@@ -51,7 +55,7 @@ class ProductController extends Controller
 	{
 		$stock_product = Auth::user()->Product()->paginate(5);
 
-		return $this->respondWithCollection($stock_product, $this->productTransformer);
+		return $this->respondWithCollection($stock_product, $this->stockProductTransformer);
 	}
 
 	public function getMutationReport()

@@ -10,15 +10,15 @@ class MutationTransformer extends TransformerAbstract
     public function transform(Product $product)
     {
         return [
-        	'product_code' => $product->product_code,
+            'product_code' => $product->product_code,
             'product_name' => $product->product_name,
-            'unit' => $product->unit
+            'unit' => $product->unit,
             'first_stock' => 0,
-            'incoming_stock' => $product->orderdetail->product_amount,
+            'incoming_stock' => $product->first()->orderdetail->first()->product_amount,
             'stock_out' => 'penjualan',
-            'incoming_value' => $product->orderdetail->subtotal_price,
+            'incoming_value' => $product->first()->orderdetail->first()->subtotal_price,
             'value_out' => 'nilai keluar',
-            'total_balance' => $product->orderdetail->order()->total_balance,
+            'total_balance' => $product->first()->orderdetail->first()->order()->first()->total_price,
             'stock' => $product->stock,
             'buy_price' => $product->buy_price,
             'sell_price' => $product->sell_price,

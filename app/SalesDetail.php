@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OrderDetail extends Model
+class SalesDetail extends Model
 {
     protected $fillable = [
-    	'order_id', 'product_code', 'product_amount', 'buy_price', 'subtotal_price'
+    	'sales_id', 'product_code', 'product_amount', 'sell_price', 'subtotal_price'
     ];
 
     public function order(){
-    	return $this->belongsTo('App\Order', 'order_id');
+    	return $this->belongsTo('App\Order', 'sales_id');
     }
 
     public function product(){
