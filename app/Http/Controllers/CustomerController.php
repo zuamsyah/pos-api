@@ -9,6 +9,7 @@ use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 use App\Transformers\CustomerTransformer;
+use Illuminate\Support\Facades\DB;
 use App\Customer;
 
 class CustomerController extends Controller
@@ -88,5 +89,12 @@ class CustomerController extends Controller
       if ($customer->delete()) {
         return $this->sendCustomResponse(204, 'Customer: ' . $customer->name . ' deleted');
       }
+    }
+
+    public function allCity()
+    {
+      $cities = DB::table('cities')->get()->all();
+
+      return response()->json(['data' => $cities],200);
     }
 }

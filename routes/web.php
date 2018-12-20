@@ -35,6 +35,9 @@ $router->group(['prefix' => 'api/v1'], function() use ($router) {
 		$router->patch('product/{id}', 'ProductController@update');
 		$router->post('product', 'ProductController@store');
       	$router->delete('product/{id}', 'ProductController@destroy');
+      	
+      	$router->get('city', 'CustomerController@allCity');
+
       	//customer
 		$router->get('customer', 'CustomerController@index');
       	$router->post('customer', 'CustomerController@store');
