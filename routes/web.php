@@ -40,11 +40,13 @@ $router->group(['prefix' => 'api/v1'], function() use ($router) {
 
       	//customer
 		$router->get('customer', 'CustomerController@index');
+		$router->get('customer/{id}', 'CustomerController@show');
       	$router->post('customer', 'CustomerController@store');
       	$router->patch('customer/{id}', 'CustomerController@update');
       	$router->delete('customer/{id}', 'CustomerController@destroy');
       	//supplier
-      	$router->get('supplier', 'SupplierController@index');
+		$router->get('supplier', 'SupplierController@index');
+		$router->get('supplier/{id}', 'SupplierController@show');  
       	$router->post('supplier', 'SupplierController@store');
       	$router->patch('supplier/{id}', 'SupplierController@update');
       	$router->delete('supplier/{id}', 'SupplierController@destroy');

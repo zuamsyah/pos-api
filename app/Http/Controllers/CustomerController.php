@@ -36,6 +36,17 @@ class CustomerController extends Controller
       return $this->respondWithCollection($customers, $this->customerTransformer);
     }
 
+    public function show($id)
+    {   
+      $customers = Customer::find($id);
+      
+      if (!$customers) {
+         return $this->sendError('Could not find Customer');
+      }
+
+      return $this->respondWithItem($customers, $this->customerTransformer);
+    }
+
     public function store(Request $request)
     {
         $input = $request->all();

@@ -30,6 +30,17 @@ class SupplierController extends Controller
       return $this->respondWithCollection($suppliers, $this->supplierTransformer);
     }
 
+    public function show($id)
+    {   
+      $suppliers = Supplier::find($id);
+      
+      if (!$suppliers) {
+         return $this->sendError('Could not find Supplier');
+      }
+
+      return $this->respondWithItem($suppliers, $this->supplierTransformer);
+    }
+
     public function store(Request $request)
     {
         $input = $request->all();

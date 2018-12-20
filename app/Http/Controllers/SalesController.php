@@ -103,16 +103,16 @@ class SalesController extends Controller
             }
             
             $sales_id = $sales_details->where('sales_id', $id)->first();
-            $product_code = DB::table('sales_details')
+            $salesdtl_code = DB::table('sales_details')
                 ->where('product_code', $product->product_code)
                 ->get()->all();
 
 
-            $stock = $product->stock;
-            // dd($stock);
-            foreach ($product_code as $product) {
-                $stock -= $product->product_amount;
-            }
+            // $stock = $product->stock;
+            // // dd($stock);
+            // foreach ($product_code as $amount) {
+            //     $stock -= $amount->product_amount;
+            // }
 
             DB::table('sales_details')
                 ->where('sales_id', $id)
@@ -124,7 +124,7 @@ class SalesController extends Controller
             DB::table('products')
                 ->where('product_code', $request->product_code)
                 ->update([
-                'stock' => $stock
+                'stock' => $product->stock - $salesdtl_code->product_amount
             ]);
             $total_price = DB::table('sales_details')
                 ->where('sales_id', $id)
@@ -138,7 +138,7 @@ class SalesController extends Controller
             DB::table('sales')
                 ->where('sales_id', $id)
                 ->update([
-                    'total_price' => $price
+                    'total_price' => $product->stock
                 ]);
 
             $data = [

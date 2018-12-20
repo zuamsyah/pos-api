@@ -104,13 +104,13 @@ class OrderController extends Controller
             }
             
             $order_id = $order_details->where('order_id', $id)->first();
-            $product_code = DB::table('order_details')
+            $orderdtl_code = DB::table('order_details')
                 ->where('product_code', $product->product_code)
                 ->get()->all();
             
             $stock = 0;
-            foreach ($product_code as $product) {
-                $stock += $product->product_amount;
+            foreach ($orderdtl_code as $amount) {
+                $stock += $amount->product_amount;
             }
 
             DB::table('order_details')
