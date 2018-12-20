@@ -64,14 +64,15 @@ class UserController extends Controller
   	 */
  	public function uploadPhoto(Request $request)
   	{
-    	$request->validate([
+    	$this->validate($request, [
             'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048'
-        ]);
+		]);
 
 	    $file = $request->file('photo');
 	    $filename = Auth::user()->username . '.' . $file->getClientOriginalExtension();
 
-	    $file->move(public_path('images'),$filename);
+	    $test = $file->move(base_path('public/images'),$filename);
+	    // dd($test);
 	    DB::table('users')
 	        ->where('id', Auth::user()->id)
 	        ->update(['photo' => url('images/'.$filename)]);

@@ -79,7 +79,7 @@ class OrderController extends Controller
             $order = Order::find($id);
             $orderdetail = OrderDetail::find($id);
             if (is_null($order)) {
-                return $this->sendError("Product with id {$id} doesn't exist");
+                return $this->sendError("Order with id {$id} doesn't exist");
             } 
             //select berdasarkan table product berdasar product code
             $product = Product::find($request->product_code);
@@ -92,6 +92,7 @@ class OrderController extends Controller
                     'product_amount' => $order_detail->product_amount + $request->product_amount,
                     // 'subtotal_price' => $order_detail->product_amount * $product->buy_price
                 ]);
+                //jika belum ada product code maka buat baru
             } else {
                 $order_detail = OrderDetail::create([
                     'order_id' => $order->order_id,

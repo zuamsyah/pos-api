@@ -79,7 +79,7 @@ class SalesController extends Controller
             $sales = Sales::find($id);
             $salesdetail = SalesDetail::find($id);
             if (is_null($sales)) {
-                return $this->sendError("Product with id {$id} doesn't exist");
+                return $this->sendError("Sales with id {$id} doesn't exist");
             } 
             //select berdasarkan table product berdasar product code
             $product = Product::find($request->product_code);
@@ -106,10 +106,12 @@ class SalesController extends Controller
             $product_code = DB::table('sales_details')
                 ->where('product_code', $product->product_code)
                 ->get()->all();
-            
-            $stock = 0;
+
+
+            $stock = $product->stock;
+            // dd($stock);
             foreach ($product_code as $product) {
-                $stock += $product->product_amount;
+                $stock -= $product->product_amount;
             }
 
             DB::table('sales_details')

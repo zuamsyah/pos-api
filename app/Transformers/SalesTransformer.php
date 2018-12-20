@@ -10,7 +10,7 @@ class SalesTransformer extends TransformerAbstract
     public function transform(Sales $sales)
     {
         return [
-        	'order_id' => $sales->order_id,
+        	'sales_id' => $sales->sales_id,
             'customer_id' => $sales->customer_id,
             'user_id' => $sales->user_id,
             'total_price' => $sales->total_price,
