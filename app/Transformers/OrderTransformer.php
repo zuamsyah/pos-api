@@ -6,26 +6,18 @@ use App\Order;
 use League\Fractal\TransformerAbstract;
 
 class OrderTransformer extends TransformerAbstract
-{	
-	// protected $defaultIncludes = [
-	// 	'user'
-	// ];
-
+{
     public function transform(Order $order)
     {
         return [
         	'order_id' => $order->order_id,
-            'supplier' => $order->supplier,
-            'user' => $order->user,
+            'supplier_id' => $order->supplier_id,
+            'supplier_name' => $order->supplier->name,
+            'user_id' => $order->user_id,
+            'user_name' => $order->user->username,
             'total_price' => $order->total_price,
             'created_at' => (string) $order->created_at,
             'updated_at' => (string) $order->updated_at,
         ];
     }
-
-    // public function includeUser(Order $order)
-    // {
-    // 	$user = $order->user;
-    // 	return $this->item($user, new UserTransformer);
-    // }
 }

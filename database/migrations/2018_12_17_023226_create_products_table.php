@@ -18,10 +18,13 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('user_id')->index();
             $table->string('product_name');
             $table->unsignedInteger('category_id')->nullable()->index();
-            $table->bigInteger('stock')->default(0);
+            $table->bigInteger('first_stock');
+            $table->bigInteger('total_stock');
             $table->string('buy_price');
             $table->string('sell_price');
             $table->string('unit');
+            $table->bigInteger('stock_in')->nullable();
+            $table->bigInteger('stock_out')->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('category_id')->on('categories')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users');

@@ -51,7 +51,8 @@ $router->group(['prefix' => 'api/v1'], function() use ($router) {
       	$router->patch('supplier/{id}', 'SupplierController@update');
       	$router->delete('supplier/{id}', 'SupplierController@destroy');
       	//transaksi
-      	$router->get('pembelian', 'OrderController@index');
+		$router->get('pembelian', 'OrderController@index');
+		$router->get('pembelian/{id}', 'OrderController@show');
       	$router->post('pembelian', 'OrderController@store');
 		$router->patch('pembelian/{id}', 'OrderController@update');
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
@@ -18,6 +17,7 @@ class CustomerController extends Controller
      * @var fractal
      */
     protected $fractal;
+
     /**
      * @var customerTransformer
      */
@@ -31,7 +31,7 @@ class CustomerController extends Controller
 
     public function index()
     {
-      $customers = Customer::paginate(5);
+      $customers = Customer::paginate(10);
      
       return $this->respondWithCollection($customers, $this->customerTransformer);
     }
@@ -50,19 +50,13 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $validator = Validator::make($input,[
+        $this->validate($request, [
             'name' => 'required|string|unique:customers',
             'address' => 'required',
             'phone_number' => 'required|max:13|unique:customers',
             'city_id'=> 'required|exists:cities,id'
         ]);
-        if ($validator->fails()) {
-          return response()->json([
-            'message' => 'Could not create new Customer',
-            'errors' => $validator->errors(),
-            'status_code' => 400
-          ], 400);
-        }
+        
         $customer = Customer::create($input);
         if($customer){
             return $this->sendData($customer->toArray(), 'The resource is created successfully');

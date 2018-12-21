@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use League\Fractal\Resource\Item;
 use League\Fractal\Manager;
 use League\Fractal\TransformerAbstract;
@@ -34,7 +33,7 @@ class ProductController extends Controller
 
 	public function index()
 	{
-		$products = Auth::user()->product()->orderBy('created_at', 'DESC')->paginate(5);
+		$products = Auth::user()->product()->orderBy('created_at', 'DESC')->paginate(10);
      
       	return $this->respondWithCollection($products, $this->productTransformer);
 	}
@@ -53,14 +52,14 @@ class ProductController extends Controller
 
 	public function getStockReport()
 	{
-		$stock_product = Auth::user()->Product()->paginate(5);
+		$stock_product = Auth::user()->Product()->paginate(10);
 
 		return $this->respondWithCollection($stock_product, $this->stockProductTransformer);
 	}
 
 	public function getMutationReport()
 	{
-		$mutation_product = Product::paginate(5);
+		$mutation_product = Product::paginate(10);
 
 		return $this->respondWithCollection($mutation_product, $this->mutationTransformer);
 	}
@@ -79,23 +78,17 @@ class ProductController extends Controller
 	{
 		$input = $request->all();
 		$user = Auth::user();
-		$validator = Validator::make($input,[
+		$this->validate($request, [
 			'product_code' => 'required|unique:products|max:20',
 			'product_name' => 'required|unique:products',
 			'category_id' => 'required|exists:categories,category_id',
+			'first_stock' => 'required',
 			'buy_price' => 'required',
 			'sell_price' => 'required',
-			'unit' => 'required|string',
+			'unit' => 'required|string'
 		]);
 
-		if ($validator->fails()) {
-			return response()->json([
-				'message' => 'Could not create new product',
-				'errors' => $validator->errors(),
-				'status_code' => 400
-			], 400);
-		}
-		$input['stock'] = 0;
+		$input['total_stock'] = $request->first_stock;
 		$product = $user->product()->create($input);
 		if($product){
             return $this->sendData($product->toArray(), 'The resource is created successfully');
@@ -106,30 +99,30 @@ class ProductController extends Controller
 
 	public function update(Request $request, $id)
     {
-      $input = $request->all();
-      $product = Product::find($id);
+		$input = $request->all();
+		$product = Product::find($id);
 
-      if (is_null($product)) {
-        return $this->sendError("Product with id {$id} doesn't exist");
-      } 
+		if (is_null($product)) {
+			return $this->sendError("Product with id {$id} doesn't exist");
+		} 
 
-      $this->validate($request, [
-        'product_name' => '',
-        'category_id' => 'integer',
-        'buy_price' => 'integer',
-        'sell_price' => 'integer',
-        'unit' => 'string',
-      ]);
+		$this->validate($request, [
+			'product_name' => '',
+			'category_id' => 'integer',
+			'buy_price' => 'integer',
+			'sell_price' => 'integer',
+			'unit' => 'string',
+		]);
 
-      $product->product_name = $input['product_name'];
-      $product->category_id = $input['category_id'];
-      $product->buy_price = $input['buy_price'];
-      $product->sell_price = $input['sell_price'];
-      $product->unit = $input['unit'];
+		$product->product_name = $input['product_name'];
+		$product->category_id = $input['category_id'];
+		$product->buy_price = $input['buy_price'];
+		$product->sell_price = $input['sell_price'];
+		$product->unit = $input['unit'];
 
-      if ($product->save()) {
-        return $this->sendResponse($product->toArray(), 'Product updated successfully.');
-      }
+		if ($product->save()) {
+			return $this->sendResponse($product->toArray(), 'Product updated successfully.');
+		}
 	}
 	
     public function destroy($id)

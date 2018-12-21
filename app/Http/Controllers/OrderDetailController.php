@@ -26,7 +26,7 @@ class OrderDetailController extends Controller
 
     public function getOrderReport()
     {
-        $order_detail = OrderDetail::paginate(5);
+        $order_detail = OrderDetail::paginate(10);
         
         return $this->respondWithCollection($order_detail, $this->orderDetailTransformer);
     }

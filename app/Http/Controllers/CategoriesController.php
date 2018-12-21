@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
@@ -31,7 +30,7 @@ class CategoriesController extends Controller
 
     public function index()
     {
-        $category = Categories::paginate(5);
+        $category = Categories::paginate(10);
 
         return $this->respondWithCollection($category, $this->categoriesTransformer);
     }
@@ -39,17 +38,10 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $validator = Validator::make($input,[
-          'category_name' => 'required|max:50|unique:categories'
+        $this->validate($request, [  
+           'category_name' => 'required|max:50|unique:categories'
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-            'message' => 'Could not create new category',
-            'errors' => $validator->errors(),
-            'status_code' => 400
-            ], 400);
-        }
         $category = Categories::create($input);
         if($category){
             return $this->sendData($category->toArray(), 'The resource is created successfully');

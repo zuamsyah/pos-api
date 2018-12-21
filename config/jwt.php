@@ -77,7 +77,7 @@ return [
     | systems in place to revoke the token if necessary.
     |
     */
-    'ttl' => env('JWT_TTL', null),
+    'ttl' => env('JWT_TTL', 1440),
     /*
     |--------------------------------------------------------------------------
     | Refresh time to live
@@ -117,7 +117,7 @@ return [
     | present in the payload.
     |
     */
-    'required_claims' => ['iss', 'iat', 'nbf', 'sub', 'jti'],
+    'required_claims' => ['iss', 'iat', 'exp', 'nbf', 'sub', 'jti'],
     /*
     |--------------------------------------------------------------------------
     | Blacklist Enabled

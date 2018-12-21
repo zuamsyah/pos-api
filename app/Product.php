@@ -11,7 +11,7 @@ class Product extends Model
     public $incrementing = false;
  
     protected $fillable = [
-      'product_code', 'user_id', 'product_name', 'category_id', 'stock', 'buy_price', 'sell_price', 'unit'
+      'product_code', 'user_id', 'product_name', 'category_id', 'first_stock', 'total_stock', 'buy_price', 'sell_price', 'unit', 'stock_in', 'stock_out'
     ];
 
     public function user(){
@@ -24,5 +24,9 @@ class Product extends Model
 
     public function orderdetail(){
       return $this->hasMany('App\OrderDetail', 'product_code');
+    }
+
+    public function salesdetail(){
+      return $this->hasMany('App\SalesDetail', 'product_code');
     }
 }

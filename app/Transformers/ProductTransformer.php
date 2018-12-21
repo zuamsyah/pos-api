@@ -13,7 +13,7 @@ class ProductTransformer extends TransformerAbstract
             'product_code' => $product->product_code,
             'product_name' => $product->product_name,
             'categories' => $product->categories,
-            'stock' => $product->stock,
+            'total_stock' => $product->total_stock,
             'buy_price' => $product->buy_price,
             'sell_price' => $product->sell_price,
             'unit' => $product->unit,
