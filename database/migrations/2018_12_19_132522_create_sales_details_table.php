@@ -21,7 +21,7 @@ class CreateSalesDetailsTable extends Migration
             $table->bigInteger('sell_price');
             $table->string('subtotal_price')->default(0);
             $table->timestamps();
-            $table->foreign('product_code')->references('product_code')->on('products');
+            $table->foreign('product_code')->references('product_code')->on('products')->onDelete('cascade');
             $table->foreign('sales_id')->references('sales_id')->on('sales')->onDelete('cascade');
         });
     }

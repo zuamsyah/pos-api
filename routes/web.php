@@ -60,8 +60,9 @@ $router->group(['prefix' => 'api/v1'], function() use ($router) {
       	$router->post('penjualan', 'SalesController@store');
 		$router->patch('penjualan/{id}', 'SalesController@update');
 		
-		$router->get('laporanpembelian', 'OrderDetailController@getOrderReport');
-		$router->get('laporanstokbarang', 'ProductController@getStockReport');
-		$router->get('laporanmutasibarang', 'ProductController@getMutationReport');
+		$router->get('laporanpembelian', 'ReportController@getOrderReport');
+		$router->get('laporanpenjualan', 'ReportController@getSalesReport');
+		$router->get('laporanstokbarang', 'ReportController@getStockReport');
+		$router->get('laporanmutasibarang', 'ReportController@getMutationReport');
 	});
 });

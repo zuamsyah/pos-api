@@ -21,7 +21,7 @@ class CreateOrderDetailsTable extends Migration
             $table->bigInteger('buy_price');
             $table->string('subtotal_price')->default(0);
             $table->timestamps();
-            $table->foreign('product_code')->references('product_code')->on('products');
+            $table->foreign('product_code')->references('product_code')->on('products')->onDelete('cascade');
             $table->foreign('order_id')->references('order_id')->on('orders')->onDelete('cascade');
         });
     }

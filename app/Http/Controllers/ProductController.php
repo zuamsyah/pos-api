@@ -19,16 +19,10 @@ class ProductController extends Controller
 
 	private $productTransformer;
 
-	private $mutationTransformer;
-
-	private $stockProductTransformer;
-
 	public function __construct(Manager $fractal, ProductTransformer $productTransformer, MutationTransformer $mutationTransformer, StockProductTransformer $stockProductTransformer)
 	{
 		$this->fractal = $fractal;
 		$this->productTransformer = $productTransformer;
-		$this->mutationTransformer = $mutationTransformer;
-		$this->stockProductTransformer = $stockProductTransformer;
 	}
 
 	public function index()

@@ -13,15 +13,13 @@ class MutationTransformer extends TransformerAbstract
             'product_code' => $product->product_code,
             'product_name' => $product->product_name,
             'first_stock' => $product->stock_awal,
-            'stock_in' => $product->orderdetail->where('product_code')->product_amount,
-            'stock_out' => $product->salesdetail->first()->product_amount,
-            'total_stock' => $product->stock_total,
-            'incoming_value' => $product->first()->orderdetail->first()->subtotal_price,
-            'value_out' => 'nilai keluar',
-            'total_balance' => $product->first()->orderdetail->first()->order()->first()->total_price,
-            'stock' => $product->stock,
-            'buy_price' => $product->buy_price,
-            'sell_price' => $product->sell_price,
+            'stock_in' => $product->stock_in,
+            'stock_out' => 'stock_out',
+            'total_stock' => $product->total_stock,
+            'first_balance' => 'first_balance',
+            'value_in' => $product->stock_in * $product->buy_price,
+            'value_out' => $product->stock_out * $product->sell_price,
+            'total_balance' => 'total_balance'
         ];
     }
 }

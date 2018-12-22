@@ -15,7 +15,7 @@ class StockProductTransformer extends TransformerAbstract
             'unit' => $product->unit,
             'buy_price' => $product->buy_price,
             'sell_price' => $product->sell_price,
-            'stock' => $product->stock,
+            'total_stock' => $product->total_stock,
             'created_at' => (string) $product->created_at,
             'updated_at' => (string) $product->updated_at,
         ];

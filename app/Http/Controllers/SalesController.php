@@ -64,10 +64,18 @@ class SalesController extends Controller
                         'sell_price' => $product->sell_price,
                         'subtotal_price' => $request->product_amount[$i] * $product->sell_price
                     ]);
+
+                    $stockout = 0;
+                    $amount = DB::table('order_details')->where('product_code', $product->product_code)->get()->all(); 
+
+                    foreach ($amount as $stock) {
+                        $stockout += $stock->product_amount;
+                    }
                     
-                    //kurang stock dari penjualan barang
+                    //hitung & kurang stock dari penjualan barang
                     DB::table('products')->where('product_code', $request->product_code[$i])->update([
-                        'stock_total' => $product_stock - $request->product_amount[$i]
+                        'stock_total' => $product_stock - $request->product_amount[$i],
+                        'stock_out' => $stockout
                     ]);
                     
                     $total = $total + $save1->subtotal_price;
