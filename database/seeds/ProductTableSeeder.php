@@ -13,7 +13,7 @@ class ProductTableSeeder extends Seeder
     {
         App\Product::insert([
         	[
-        		'product_code'=> 'AR7161229',
+        		'product_code'=> 'AR91237',
         		'user_id' => 1,
 			    'product_name'=> 'ASUS ROG Zeph2yrus GX501GI-XS74',
 			    'category_id'=> 5,
