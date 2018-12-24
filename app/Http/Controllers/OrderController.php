@@ -76,7 +76,7 @@ class OrderController extends Controller
 
                     $stockin = 0;
                     $amount = DB::table('order_details')->where('product_code', $product->product_code)->get()->all(); 
-
+                    
                     foreach ($amount as $stock) {
                         $stockin += $stock->product_amount;
                     }
