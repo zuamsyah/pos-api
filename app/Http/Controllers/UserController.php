@@ -75,14 +75,19 @@ class UserController extends Controller
 		]);
 
 	    $file = $request->file('photo');
-	    $filename = Auth::user()->username . $file->getClientOriginalName();
+	    if ($file) {
+		    $filename = Auth::user()->username . date('Ymd') .'.'. $file->getClientOriginalExtension();
 
-	    $test = $file->move(base_path('public/images'),$filename);
-		
-		DB::table('users')
-	        ->where('id', Auth::user()->id)
-	        ->update(['photo' => url('images/'.$filename)]);
+		    $file->move('images',$filename);
+			
+			DB::table('users')
+		        ->where('id', Auth::user()->id)
+		        ->update(['photo' => url('images/'.$filename)]);
 
-	    return response()->json(['message' => 'photo uploaded', 'status_code' => 200],200);
+		    return response()->json(['message' => 'photo uploaded', 'status_code' => 200],200);
+	    } else { 	
+		    return response()->json(['message' => 'Internal Error', 'status_code' => 500],500);
+	    }
+	    
   	}
 }
