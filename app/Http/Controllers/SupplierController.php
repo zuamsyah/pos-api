@@ -85,7 +85,7 @@ class SupplierController extends Controller
         return $this->sendError('Supplier not found');
       }
       if ($supplier->delete()) {
-        return $this->sendCustomResponse(204, 'Supplier: ' . $supplier->name . ' Telah Dihapus');
+        return $this->sendCustomResponse(200, 'Supplier: ' . $supplier->name . ' Telah Dihapus');
       }
     }
 }
