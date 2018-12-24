@@ -127,7 +127,7 @@ class ProductController extends Controller
       }
 
       if ($product->delete()) {
-        return $this->sendCustomResponse(204, 'Product: ' . $product->product_name . ' deleted');
+        return $this->sendCustomResponse(200, 'Product: ' . $product->product_name . ' deleted');
       }
     }
 }
