@@ -42,7 +42,6 @@ class SalesController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $product = Product::find($request->product_code)->first();
         $this->validate($request, [
             'customer_id' => 'required|integer|exists:customers,customer_id',
             'product_code' => 'required|exists:products,product_code'
@@ -56,7 +55,8 @@ class SalesController extends Controller
             if ($save) {
                 $id_sales = $save->sales_id;
                 for ($i=0; $i < count($request->product_code); $i++) { 
-                    $product_stock = Product::find($request->product_code[$i])->stock_total;
+                    $product = Product::find($request->product_code[$i]);
+                    $product_stock = Product::find($request->product_code[$i])->total_stock;
                     $save1 = SalesDetail::create([
                         'sales_id' => $id_sales,
                         'product_code' => $request->product_code[$i],
@@ -66,19 +66,19 @@ class SalesController extends Controller
                     ]);
 
                     $stockout = 0;
-                    $amount = DB::table('order_details')->where('product_code', $product->product_code)->get()->all(); 
-
+                    $amount = DB::table('sales_details')->where('product_code', $product->product_code)->get()->all();
+                    
                     foreach ($amount as $stock) {
                         $stockout += $stock->product_amount;
                     }
                     
                     //hitung & kurang stock dari penjualan barang
                     DB::table('products')->where('product_code', $request->product_code[$i])->update([
-                        'stock_total' => $product_stock - $request->product_amount[$i],
+                        'total_stock' => $product_stock - $request->product_amount[$i],
                         'stock_out' => $stockout
                     ]);
                     
-                    $total = $total + $save1->subtotal_price;
+                    $total += $save1->subtotal_price;
                     //hitung total harga
                     DB::table('sales')->where('sales_id', $id_sales)->update([
                         'total_price' => $total
