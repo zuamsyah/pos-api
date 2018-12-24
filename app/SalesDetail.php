@@ -10,8 +10,8 @@ class SalesDetail extends Model
     	'sales_id', 'product_code', 'product_amount', 'sell_price', 'subtotal_price'
     ];
 
-    public function order(){
-    	return $this->belongsTo('App\Order', 'sales_id');
+    public function sales(){
+    	return $this->belongsTo('App\Sales', 'sales_id');
     }
 
     public function product(){
