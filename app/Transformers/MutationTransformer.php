@@ -12,14 +12,14 @@ class MutationTransformer extends TransformerAbstract
         return [
             'product_code' => $product->product_code,
             'product_name' => $product->product_name,
-            'first_stock' => $product->stock_awal,
+            'first_stock' => $product->first_stock,
             'stock_in' => $product->stock_in,
-            'stock_out' => 'stock_out',
+            'stock_out' => $product->stock_out,
             'total_stock' => $product->total_stock,
-            'first_balance' => 'first_balance',
+            'first_balance' => $product->first_stock * $product->buy_price,
             'value_in' => $product->stock_in * $product->buy_price,
             'value_out' => $product->stock_out * $product->sell_price,
-            'total_balance' => 'total_balance'
+            'total_balance' => ($product->first_stock * $product->buy_price) + ($product->stock_in * $product->buy_price) - ($product->stock_out * $product->sell_price)
         ];
     }
 }
