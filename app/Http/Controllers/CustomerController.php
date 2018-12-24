@@ -92,7 +92,7 @@ class CustomerController extends Controller
         return $this->sendError('Customer not found');
       }
       if ($customer->delete()) {
-        return $this->sendCustomResponse(204, 'Customer: ' . $customer->name . ' deleted');
+        return $this->sendCustomResponse(200, 'Customer: ' . $customer->name . ' deleted');
       }
     }
 
