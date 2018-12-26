@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
@@ -24,14 +25,14 @@ class SupplierController extends Controller
 
     public function index()
     {   
-  	  $suppliers = Supplier::paginate(10);
+  	  $suppliers = Auth::user()->supplier()->paginate(10);
 
       return $this->respondWithCollection($suppliers, $this->supplierTransformer);
     }
 
     public function show($id)
     {   
-      $suppliers = Supplier::find($id);
+      $suppliers = Auth::user()->supplier()->find($id);
       
       if (!$suppliers) {
          return $this->sendError('Could not find Supplier');
