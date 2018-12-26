@@ -10,6 +10,8 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
+//secure url
+URL::forceScheme('https');
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
@@ -59,10 +61,14 @@ $router->group(['prefix' => 'api/v1'], function() use ($router) {
 		$router->get('penjualan', 'SalesController@index');
       	$router->post('penjualan', 'SalesController@store');
 		$router->patch('penjualan/{id}', 'SalesController@update');
-		
-		$router->get('laporanpembelian', 'ReportController@getOrderReport');
-		$router->get('laporanpenjualan', 'ReportController@getSalesReport');
-		$router->get('laporanstokbarang', 'ReportController@getStockReport');
-		$router->get('laporanmutasibarang', 'ReportController@getMutationReport');
+		//laporan
+		$router->get('laporanpembelianhari', 'ReportController@getDayOrderReport');
+		$router->get('laporanpembelianbulan', 'ReportController@getMonthOrderReport');
+		$router->get('laporanpenjualanhari', 'ReportController@getDaySalesReport');
+		$router->get('laporanpenjualanbulan', 'ReportController@getMonthSalesReport');
+		$router->get('laporanstokbaranghari', 'ReportController@getDayStockReport');
+		$router->get('laporanstokbarangbulan', 'ReportController@getMonthStockReport');
+		$router->get('laporanmutasibaranghari', 'ReportController@getDayMutationReport');
+		$router->get('laporanmutasibarangbulan', 'ReportController@getMonthMutationReport');
 	});
 });
