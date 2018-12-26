@@ -30,7 +30,7 @@ class CategoriesController extends Controller
 
     public function index()
     {
-        $category = Categories::paginate(10);
+        $category = Auth::user()->categories()->paginate(10);
 
         return $this->respondWithCollection($category, $this->categoriesTransformer);
     }
