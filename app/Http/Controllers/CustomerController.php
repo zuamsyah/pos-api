@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
@@ -31,14 +32,14 @@ class CustomerController extends Controller
 
     public function index()
     {
-      $customers = Customer::paginate(10);
+      $customers = Auth::user()->customer()->paginate(10);
      
       return $this->respondWithCollection($customers, $this->customerTransformer);
     }
 
     public function show($id)
     {   
-      $customers = Customer::find($id);
+      $customers = Auth::user()->customer()->find($id);
       
       if (!$customers) {
          return $this->sendError('Could not find Customer');
