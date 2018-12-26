@@ -9,8 +9,6 @@ use League\Fractal\Resource\Item;
 use League\Fractal\Manager;
 use League\Fractal\TransformerAbstract;
 use App\Transformers\ProductTransformer;
-use App\Transformers\MutationTransformer;
-use App\Transformers\StockProductTransformer;
 use App\Product;
 
 class ProductController extends Controller
@@ -19,7 +17,7 @@ class ProductController extends Controller
 
 	private $productTransformer;
 
-	public function __construct(Manager $fractal, ProductTransformer $productTransformer, MutationTransformer $mutationTransformer, StockProductTransformer $stockProductTransformer)
+	public function __construct(Manager $fractal, ProductTransformer $productTransformer)
 	{
 		$this->fractal = $fractal;
 		$this->productTransformer = $productTransformer;
@@ -42,20 +40,6 @@ class ProductController extends Controller
 		} else {
 			return response()->json(['message' => 'please input the product name'],404);
 		}
-	}
-
-	public function getStockReport()
-	{
-		$stock_product = Auth::user()->Product()->paginate(10);
-
-		return $this->respondWithCollection($stock_product, $this->stockProductTransformer);
-	}
-
-	public function getMutationReport()
-	{
-		$mutation_product = Product::paginate(10);
-
-		return $this->respondWithCollection($mutation_product, $this->mutationTransformer);
 	}
 
 	public function show($id)
