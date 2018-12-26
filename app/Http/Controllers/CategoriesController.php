@@ -38,11 +38,12 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        $user = Auth::user();
         $this->validate($request, [  
-           'category_name' => 'required|max:50|unique:categories'
+           'category_name' => 'required|max:50|unique:categories,category_name,null,category_id,user_id,'.Auth::id(),
         ]);
 
-        $category = Categories::create($input);
+        $category = $user->categories()->create($input);
         if($category){
             return $this->sendData($category->toArray(), 'The resource is created successfully');
         }else{
