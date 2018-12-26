@@ -44,14 +44,15 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        $user = Auth::user();
         $this->validate($request, [
-            'name' => 'required|unique:suppliers',
+            'name' => 'required|unique:suppliers,name,null,supplier_id,user_id,'.Auth::id(),
             'address' => 'required',
             'phone_number' => 'required|max:13',
             'city_id'=> 'required|exists:cities,id'
         ]);
         
-        $supplier = Supplier::create($input);
+        $supplier = $user->supplier()->create($input);
         if($supplier){
             return $this->sendData($supplier->toArray(), 'The resource is created successfully');
           }else{
