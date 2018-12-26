@@ -57,8 +57,16 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
        $this->attributes['password'] = Hash::make($password);
     }
 
+    public function categories(){
+      return $this->hasMany('App\Categories', 'user_id');
+    }
+
     public function customer(){
       return $this->hasMany('App\Customer', 'user_id');
+    }
+
+    public function supplier(){
+      return $this->hasMany('App\Supplier', 'user_id');
     }
 
     public function order(){
