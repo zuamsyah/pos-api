@@ -51,14 +51,15 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        $user = Auth::user();
         $this->validate($request, [
-            'name' => 'required|string|unique:customers',
+            'name' => 'required|string|unique:customers,name,null,customer_id,user_id,'.Auth::id(),
             'address' => 'required',
             'phone_number' => 'required|max:13|unique:customers',
             'city_id'=> 'required|exists:cities,id'
         ]);
         
-        $customer = Customer::create($input);
+        $customer = $user->customer()->create($input);
         if($customer){
             return $this->sendData($customer->toArray(), 'The resource is created successfully');
           }else{
