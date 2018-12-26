@@ -12,16 +12,16 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
     	App\Categories::insert([
-    		['category_name' => 'Pakaian'],
-    		['category_name' => 'Makanan'],
-    		['category_name' => 'Alat Tulis'],
-    		['category_name' => 'Kendaraan'],
-    		['category_name' => 'Elektronik'],
-    		['category_name' => 'Mainan'],
-    		['category_name' => 'Kamera'],
-    		['category_name' => 'Sepeda'],
-    		['category_name' => 'Mobil'],
-    		['category_name' => 'Buku'],
+    		['category_name' => 'Pakaian', 'user_id' => 1,],
+    		['category_name' => 'Makanan', 'user_id' => 1,],
+    		['category_name' => 'Alat Tulis', 'user_id' => 1,],
+    		['category_name' => 'Kendaraan', 'user_id' => 1,],
+    		['category_name' => 'Elektronik', 'user_id' => 1,],
+    		['category_name' => 'Mainan', 'user_id' => 1,],
+    		['category_name' => 'Kamera', 'user_id' => 1,],
+    		['category_name' => 'Sepeda', 'user_id' => 1,],
+    		['category_name' => 'Mobil', 'user_id' => 1,],
+    		['category_name' => 'Buku', 'user_id' => 1,],
     	]);
     }
 }
