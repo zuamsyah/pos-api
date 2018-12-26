@@ -57,8 +57,8 @@ class ProductController extends Controller
 		$input = $request->all();
 		$user = Auth::user();
 		$this->validate($request, [
-			'product_code' => 'required|unique:products|max:20',
-			'product_name' => 'required|unique:products',
+			'product_code' => 'required|max:20|unique:products,product_code,null,product_code,user_id,'.Auth::id(),
+			'product_name' => 'required|unique:products,product_name,null,product_code,user_id,'.Auth::id(),
 			'category_id' => 'required|exists:categories,category_id',
 			'first_stock' => 'required',
 			'buy_price' => 'required',
