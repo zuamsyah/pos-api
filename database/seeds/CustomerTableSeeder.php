@@ -12,7 +12,8 @@ class CustomerTableSeeder extends Seeder
     public function run()
     {
         App\Customer::insert([
-        	'name' => 'Syarif Hidayat',
+            'name' => 'Syarif Hidayat',
+            'user_id' => 1,
         	'address' => 'Jl. Garuda 2 no 712',
         	'phone_number' => '085271251222',
         	'city_id' => 444,
