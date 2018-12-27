@@ -20,7 +20,6 @@ class Handler extends ExceptionHandler
      */
     protected $dontReport = [
         AuthorizationException::class,
-        HttpException::class,
         ModelNotFoundException::class,
         ValidationException::class,
     ];
@@ -59,6 +58,10 @@ class Handler extends ExceptionHandler
             return response()->json((['status' => 404, 'message' => 'The requested resource was not found']), 404);
         }
 
+        if ($e instanceof HttpException) {
+            return response()->json((['status' => 401, 'message' => 'Unauthenticated']), 401);
+        }
+        
         return parent::render($request, $e);
     }
 }
