@@ -11,7 +11,7 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-    	App\Categories::insert([
+    	App\Models\Categories::insert([
     		['category_name' => 'Pakaian', 'user_id' => 1,],
     		['category_name' => 'Makanan', 'user_id' => 1,],
     		['category_name' => 'Alat Tulis', 'user_id' => 1,],

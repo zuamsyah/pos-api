@@ -11,7 +11,7 @@ class SupplierTableSeeder extends Seeder
      */
     public function run()
     {
-        App\Supplier::insert([
+        App\Models\Supplier::insert([
             'name' => 'Lutfi Wicak',
             'user_id' => 1,
         	'address' => 'Jl. Merak 2 no 82',

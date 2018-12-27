@@ -11,7 +11,7 @@ class CustomerTableSeeder extends Seeder
      */
     public function run()
     {
-        App\Customer::insert([
+        App\Models\Customer::insert([
             'name' => 'Syarif Hidayat',
             'user_id' => 1,
         	'address' => 'Jl. Garuda 2 no 712',

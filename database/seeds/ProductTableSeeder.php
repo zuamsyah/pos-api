@@ -11,7 +11,7 @@ class ProductTableSeeder extends Seeder
      */
     public function run()
     {
-        App\Product::insert([
+        App\Models\Product::insert([
         	[
         		'product_code'=> 'AR91237',
         		'user_id' => 1,
