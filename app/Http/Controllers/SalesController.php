@@ -62,7 +62,7 @@ class SalesController extends Controller
                 for ($i=0; $i < count($request->product_code); $i++) { 
                     $product = Product::find($request->product_code[$i]);
                     $product_stock = Product::find($request->product_code[$i])->total_stock;
-                    $save1 = SalesDetail::create([
+                    $save1 = Auth::user()->salesdetail()->create([
                         'sales_id' => $id_sales,
                         'product_code' => $request->product_code[$i],
                         'product_amount' => $request->product_amount[$i],
