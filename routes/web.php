@@ -10,8 +10,6 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-//secure url
-URL::forceScheme('https');
 
 //generate key
 $router->get('/key', function() {
@@ -44,7 +42,7 @@ $router->group(['prefix' => 'api/v1'], function() use ($router) {
 		$router->patch('products/{id}', 'ProductController@update');
       	$router->delete('products/{id}', 'ProductController@destroy');
       	
-      	$router->get('city', 'CustomerController@allCity');
+      	$router->get('cities', 'CustomerController@allCity');
 
       	//customer
 		$router->get('customers', 'CustomerController@index');
