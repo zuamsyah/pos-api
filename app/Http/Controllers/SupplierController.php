@@ -9,14 +9,25 @@ use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 use App\Transformers\SupplierTransformer;
-use App\Supplier;
+use App\Models\Supplier;
 
 class SupplierController extends Controller
 {
+    /**
+     * @var fractal
+     */
     protected $fractal;
 
+    /**
+     * @var supplierTransformer
+     */
     private $supplierTransformer;
 
+    /**
+     * Construct Manager & Transformer instance
+     * @param Manager             $fractal            
+     * @param SupplierTransformer $supplierTransformer
+     */
     public function __construct(Manager $fractal, SupplierTransformer $supplierTransformer)
     {
       $this->fractal = $fractal;
@@ -48,7 +59,7 @@ class SupplierController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:suppliers,name,null,supplier_id,user_id,'.Auth::id(),
             'address' => 'required',
-            'phone_number' => 'required|max:13',
+            'phone_number' => 'required|max:13|unique:suppliers',
             'city_id'=> 'required|exists:cities,id'
         ]);
         

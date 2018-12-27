@@ -9,7 +9,7 @@ use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 use App\Transformers\CategoriesTransformer;
-use App\Categories;
+use App\Models\Categories;
 
 class CategoriesController extends Controller
 {
@@ -22,6 +22,11 @@ class CategoriesController extends Controller
      */
     private $categoriesTransformer;
 
+    /**
+     * Construct Manager & Transformer instance
+     * @param Manager               $fractal              
+     * @param CategoriesTransformer $categoriesTransformer
+     */
     function __construct(Manager $fractal, CategoriesTransformer $categoriesTransformer)
     {
         $this->fractal = $fractal;

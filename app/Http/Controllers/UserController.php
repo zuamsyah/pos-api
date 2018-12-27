@@ -10,14 +10,25 @@ use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 use App\Transformers\UserTransformer;
-use App\User;
+use App\Models\User;
 
 class UserController extends Controller
 {
+	/**
+	 * @var fractal
+	 */
 	protected $fractal;
 
+	/**
+	 * @var userTransformer
+	 */
 	private $userTransformer;
 
+	/**
+	 * Construct Manager & Transformer instance
+	 * @param Manager         $fractal        
+	 * @param UserTransformer $userTransformer
+	 */
 	public function __construct(Manager $fractal, UserTransformer $userTransformer)
 	{
 		$this->fractal = $fractal;
@@ -26,22 +37,23 @@ class UserController extends Controller
 
 	/**
 	 * Profile of user auth
-	 * @param  Request $request [description]
-	 * @return [type]           [description]
+	 * @param  Request $request
+	 * @return respondWithItem
 	 */
 	public function profile(Request $request)
     {
         $users = Auth::user();
 
-        return response()->json(['data' => $users],200);
-        // return $this->respondWithItem($users, $this->userTransformer);
-
+		if(!$users){
+			return response()->json(['success' => false, 'message' => 'User Not found'],404);
+		}
+        return $this->respondWithItem($users, $this->userTransformer);
     }
     
     /**
     * Update the specified resource
-    * @param  Request $request [description]
-    * @return [type]           [description]
+    * @param  Request $request
+    * @return sendResponse
     */
     public function update(Request $request)
     {
@@ -65,8 +77,8 @@ class UserController extends Controller
 
   	/**
   	 * Upload user profile
-  	 * @param  Request $request [description]
-  	 * @return [type]           [description]
+  	 * @param  Request $request
+  	 * @return \Illuminate\Http\JsonResponse          
   	 */
  	public function uploadPhoto(Request $request)
   	{

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
 use JWTAuthException;
-use App\User;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -52,6 +52,7 @@ class AuthController extends Controller
             ],
         ]);
     }
+    
     public function register(Request $request)
     {
         $input = $request->all();
@@ -79,9 +80,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        // Get JWT Token from the request header key "Authorization"
         $token = $request->header('Authorization');
-        // Invalidate the token
         try {
             JWTAuth::invalidate($token);
             return response()->json([
@@ -89,7 +88,6 @@ class AuthController extends Controller
                 'message'=> "User successfully logged out."
             ]);
         } catch (JWTException $e) {
-            // something went wrong whilst attempting to encode the token
             return response()->json([
             'status' => 'error',
             'message' => 'Failed to logout, please try again.'

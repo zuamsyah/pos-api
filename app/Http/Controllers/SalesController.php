@@ -10,9 +10,9 @@ use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 use App\Transformers\SalesTransformer;
-use App\Sales;
-use App\Product;
-use App\SalesDetail;
+use App\Models\Sales;
+use App\Models\Product;
+use App\Models\SalesDetail;
 
 class SalesController extends Controller
 {
@@ -26,6 +26,11 @@ class SalesController extends Controller
      */
     private $salesTransformer;
 
+    /**
+     * Construct Manager & Transformer instance
+     * @param Manager          $fractal         
+     * @param SalesTransformer $salesTransformer
+     */
     public function __construct(Manager $fractal, SalesTransformer $salesTransformer)
     {
         $this->fractal = $fractal;

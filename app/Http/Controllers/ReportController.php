@@ -13,17 +13,34 @@ use App\Transformers\GetOrderTransformer;
 use App\Transformers\GetSalesTransformer;
 use App\Transformers\MutationTransformer;
 use App\Transformers\StockProductTransformer;
-use App\OrderDetail;
-use App\SalesDetail;
-use App\Product;
+use App\Models\OrderDetail;
+use App\Models\SalesDetail;
+use App\Models\Product;
 use Carbon\Carbon;
 
 class ReportController extends Controller
-{
+{   
+    /**
+     * @var fractal
+     */
     protected $fractal;
 
+    /**
+     * @var getOrderTransformer
+     * @var getSalesTransformer
+     * @var mutationTransformer
+     * @var stockProductTransformer
+     */
     private $getOrderTransformer, $getSalesTransformer, $mutationTransformer, $stockProductTransformer;
 
+    /**
+     * Construct Manager & Transformer instance
+     * @param Manager                 $fractal                
+     * @param GetOrderTransformer     $getOrderTransformer    
+     * @param GetSalesTransformer     $getSalesTransformer    
+     * @param MutationTransformer     $mutationTransformer    
+     * @param StockProductTransformer $stockProductTransformer
+     */
     public function __construct(Manager $fractal, GetOrderTransformer $getOrderTransformer, GetSalesTransformer $getSalesTransformer, MutationTransformer $mutationTransformer, StockProductTransformer $stockProductTransformer)
     {
         $this->fractal = $fractal;

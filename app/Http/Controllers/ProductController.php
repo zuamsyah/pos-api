@@ -5,18 +5,30 @@ namespace App\Http\Controllers;
 use App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use League\Fractal\Resource\Item;
 use League\Fractal\Manager;
 use League\Fractal\TransformerAbstract;
 use App\Transformers\ProductTransformer;
-use App\Product;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
+	/**
+	 * @var fractal
+	 */
 	protected $fractal;
 
+	/**
+	 * @var productTransformer
+	 */
 	private $productTransformer;
 
+	/**
+	 * Construct Manager & Transformer instance
+	 * @param Manager            $fractal           
+	 * @param ProductTransformer $productTransformer
+	 */
 	public function __construct(Manager $fractal, ProductTransformer $productTransformer)
 	{
 		$this->fractal = $fractal;
@@ -33,8 +45,7 @@ class ProductController extends Controller
 	public function searchDataProduct(Request $request)
 	{
 		$data = ucfirst($request->get('product'));
-		$product = Product::where('product_name', 'like', "%{$data}%")->get();
-	
+		$product = DB::table('products')->where('product_name', 'like', "%{$data}%")->get();
 		if ($data) {
 			return response()->json(['data' => $product],200);
 		} else {
@@ -57,7 +68,7 @@ class ProductController extends Controller
 		$input = $request->all();
 		$user = Auth::user();
 		$this->validate($request, [
-			'product_code' => 'required|max:20|unique:products,product_code,null,product_code,user_id,'.Auth::id(),
+			'product_code' => 'required|max:20|unique:products',
 			'product_name' => 'required|unique:products,product_name,null,product_code,user_id,'.Auth::id(),
 			'category_id' => 'required|exists:categories,category_id',
 			'first_stock' => 'required',

@@ -2,7 +2,7 @@
 
 namespace App\Transformers;
 
-use App\SalesDetail;
+use App\Models\SalesDetail;
 use League\Fractal\TransformerAbstract;
 
 class GetSalesTransformer extends TransformerAbstract

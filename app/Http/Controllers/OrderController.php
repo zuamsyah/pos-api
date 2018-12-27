@@ -10,9 +10,9 @@ use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 use App\Transformers\OrderTransformer;
-use App\Order;
-use App\Product;
-use App\OrderDetail;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\OrderDetail;
 
 class OrderController extends Controller
 {
@@ -26,6 +26,11 @@ class OrderController extends Controller
      */
     private $orderTransformer;
 
+    /**
+     * Construct Manager & Transformer instance
+     * @param Manager          $fractal         
+     * @param OrderTransformer $orderTransformer
+     */
     public function __construct(Manager $fractal, OrderTransformer $orderTransformer)
     {
         $this->fractal = $fractal;

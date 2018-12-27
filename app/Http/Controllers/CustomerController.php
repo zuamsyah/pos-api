@@ -10,7 +10,7 @@ use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 use App\Transformers\CustomerTransformer;
 use Illuminate\Support\Facades\DB;
-use App\Customer;
+use App\Models\Customer;
 
 class CustomerController extends Controller
 {
@@ -24,6 +24,11 @@ class CustomerController extends Controller
      */
     private $customerTransformer;
 
+    /**
+     * Construct Manager & Transformer instance
+     * @param Manager             $fractal            
+     * @param CustomerTransformer $customerTransformer
+     */
     public function __construct(Manager $fractal, CustomerTransformer $customerTransformer)
     {
         $this->fractal = $fractal;
