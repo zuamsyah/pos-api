@@ -17,10 +17,12 @@ class CreateSalesDetailsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('sales_id')->index();
             $table->string('product_code',30)->index();
+            $table->unsignedInteger('user_id')->index();
             $table->bigInteger('product_amount');
             $table->bigInteger('sell_price');
             $table->string('subtotal_price')->default(0);
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('product_code')->references('product_code')->on('products')->onDelete('cascade');
             $table->foreign('sales_id')->references('sales_id')->on('sales')->onDelete('cascade');
         });
