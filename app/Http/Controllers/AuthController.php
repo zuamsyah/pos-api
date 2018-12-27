@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Laravel\Lumen\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
 use JWTAuthException;
@@ -96,25 +97,27 @@ class AuthController extends Controller
     }
 
     // without email reset
-    public function changepassword(Request $request)
+    public function updatePassword(Request $request)
     {
-        $user = Auth::user();
-        $validator = Validator::make($request->all(), [
-            'password' => 'required|min:6|unique:users',
+        $data = $request->all();
+        $user = User::find(Auth::id());
+        $this->validate($request,[
+            'old_password' => 'required',
+            'new_password' => 'required|min:6',
+            'confirm_password' => 'required|same:new_password'
         ]);
-        if ($validator->fails()) {
-        return response()->json($validator->errors());
-        }
-        if ($user->update($request->only(['password']))) {
+        
+        if (!Hash::check($data['old_password'], $user->password)) {
             return response()->json([
-                'message' => 'You are changed your password successful',
-                'code' => 200,
-            ],200);
+                'success' => false, 
+                'message' => 'The specified password does not match the database password'
+            ],406);
         } else {
+            Auth::user()->update($request->only(['password']));
             return response()->json([
-                'message' => 'Internal Error',
-                'code' => 500,
-            ],500);
+                        'message' => 'You are changed your password successful',
+                        'code' => 200,
+                    ],200);
         }
     }
 }
