@@ -54,9 +54,8 @@ class ReportController extends Controller
     {
         $date = $request->get('date');
         $now = Carbon::now()->toDateString();
-        $today = OrderDetail::whereDate('created_at', '=', $now)->paginate(10);
-        $order_report = OrderDetail::whereDate('created_at', '=', $date)->paginate(10);
-     
+        $today = Auth::user()->orderdetail()->whereDate('created_at', '=', $now)->paginate(10);
+        $order_report = Auth::user()->orderdetail()->whereDate('created_at', '=', $date)->paginate(10);
         if ($date) {
             return $this->respondWithCollection($order_report, $this->getOrderTransformer);
         } else {
@@ -70,8 +69,8 @@ class ReportController extends Controller
         $year = $request->get('year');
         $month_now = Carbon::now()->format('m');
         $year_now = Carbon::now()->format('Y');
-        $today = OrderDetail::whereMonth('created_at', '=', $month_now)->whereYear('created_at', '=', $year_now)->paginate(10);
-        $order_report = OrderDetail::whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->paginate(10);
+        $today = Auth::user()->orderdetail()->whereMonth('created_at', '=', $month_now)->whereYear('created_at', '=', $year_now)->paginate(10);
+        $order_report = Auth::user()->orderdetail()->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->paginate(10);
 
         if ($month) {
             if ($year) {
@@ -86,8 +85,8 @@ class ReportController extends Controller
     {
         $date = $request->get('date');
         $now = Carbon::now()->toDateString();
-        $today = SalesDetail::whereDate('created_at', '=', $now)->paginate(10);
-        $sales_report = SalesDetail::whereDate('created_at', '=', $date)->paginate(10);
+        $today = Auth::user()->salesdetail()->whereDate('created_at', '=', $now)->paginate(10);
+        $sales_report = Auth::user()->salesdetail()->whereDate('created_at', '=', $date)->paginate(10);
      
         if ($date) {
             return $this->respondWithCollection($sales_report, $this->getSalesTransformer);
@@ -102,8 +101,8 @@ class ReportController extends Controller
         $year = $request->get('year');
         $month_now = Carbon::now()->format('m');
         $year_now = Carbon::now()->format('Y');
-        $today = SalesDetail::whereMonth('created_at', '=', $month_now)->whereYear('created_at', '=', $year_now)->paginate(10);
-        $sales_report = SalesDetail::whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->paginate(10);
+        $today = Auth::user()->salesdetail()->whereMonth('created_at', '=', $month_now)->whereYear('created_at', '=', $year_now)->paginate(10);
+        $sales_report = Auth::user()->salesdetail()->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->paginate(10);
 
         if ($month) {
             if ($year) {
@@ -164,8 +163,8 @@ class ReportController extends Controller
     {
         $date = $request->get('date');
         $now = Carbon::now()->toDateString();
-        $today = Product::whereDate('created_at', '=', $now)->paginate(10);
-        $mutation_report = Product::whereDate('created_at', '=', $date)->paginate(10);
+        $today = Auth::user()->Product()->whereDate('created_at', '=', $now)->paginate(10);
+        $mutation_report = Auth::user()->Product()->whereDate('created_at', '=', $date)->paginate(10);
      
         if ($date) {
             return $this->respondWithCollection($mutation_report, $this->mutationTransformer);
@@ -180,8 +179,8 @@ class ReportController extends Controller
         $year = $request->get('year');
         $month_now = Carbon::now()->format('m');
         $year_now = Carbon::now()->format('Y');
-        $today = Product::whereMonth('created_at', '=', $month_now)->whereYear('created_at', '=', $year_now)->paginate(10);
-        $mutation_report = Product::whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->paginate(10);
+        $today = Auth::user()->Product()->whereMonth('created_at', '=', $month_now)->whereYear('created_at', '=', $year_now)->paginate(10);
+        $mutation_report = Auth::user()->Product()->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->paginate(10);
 
         if ($month) {
             if ($year) {
