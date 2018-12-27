@@ -15,7 +15,7 @@ class ProductTableSeeder extends Seeder
         	[
         		'product_code'=> 'AR91237',
         		'user_id' => 1,
-			    'product_name'=> 'ASUS ROG Zeph2yrus GX501GI-XS74',
+			    'product_name'=> 'Asus ROG Zeph2yrus GX501GI-XS74',
 			    'category_id'=> 5,
 			    'first_stock'=> 10,
 			    'total_stock'=> 10,
