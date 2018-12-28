@@ -1,4 +1,4 @@
-# Lumen PHP Framework
+# REST API with Lumen
 
 [![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
 [![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
@@ -6,15 +6,30 @@
 [![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
 [![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+Penjualanapp RESTful API for Lumen micro-framework. Features included:
 
-## Official Documentation
+## Features
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+- Validation
+- JWT Authentication
+- Models with proper relationships
+- API Response with [Fractal](http://fractal.thephpleague.com/)
+- Pagination
+- Seeding Database
+- Error Handling
+- [CORS](https://github.com/barryvdh/laravel-cors) Support
+- Endpoint Tests and Unit Tests
+- RESTful routing
+- PostgreSQL Database
 
-## Security Vulnerabilities
+## Routes List:
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+### Auth
+
+| HTTP Method	| Path | Action | Scope | Desciption  |
+| ----------- | ---- | ------ | ----- | ----------- |
+| `POST`      | `api/v1/auth/register` | `register` | `users:create` | `Create an user` |
+
 
 ## License
 
