@@ -46,11 +46,13 @@ class OrderController extends Controller
 
     public function show($id)
 	{
-		$data = Order::find($id)->OrderDetail()->get();
-		if (!$data) {
+        $query = Order::find($id);
+		if (!$query) {
 			return $this->sendError('Could not found the order');
+        } else {
+            $data = $query->orderdetail()->get();
+            return response()->json(['data' => $data],200);   
         }
-        return response()->json(['data' => $data],200);
 	}
 
     public function store(Request $request)
