@@ -26,7 +26,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $validator->messages()
-            ]);
+            ],422);
         }
 
         try {
