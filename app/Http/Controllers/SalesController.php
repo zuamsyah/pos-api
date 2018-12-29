@@ -44,6 +44,17 @@ class SalesController extends Controller
         return $this->respondWithCollection($sales, $this->salesTransformer);
     }
 
+    public function show($id)
+	{
+        $query = Sales::find($id);
+		if (!$query) {
+			return $this->sendError('Could not found the sales');
+        } else {
+            $data = $query->salesdetail()->get();
+            return response()->json(['data' => $data],200);   
+        }
+	}
+
     public function store(Request $request)
     {
         $input = $request->all();
