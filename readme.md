@@ -1,4 +1,4 @@
-# Lumen PHP Framework
+# REST API with Lumen
 
 [![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
 [![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
@@ -6,15 +6,119 @@
 [![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
 [![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+Penjualanapp RESTful API for Lumen micro-framework.
 
-## Official Documentation
+## Features
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+- Validation
+- JWT Authentication
+- Models with proper relationships
+- API Response with [Fractal](http://fractal.thephpleague.com/)
+- Pagination
+- Seeding Database
+- Error Handling
+- [CORS](https://github.com/barryvdh/laravel-cors) Support
+- Endpoint Tests and Unit Tests
+- RESTful routing
+- Filter data
+- Custom respond function
+- PostgreSQL Database
 
-## Security Vulnerabilities
+## Installation
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+- `git clone https://github.com/zuams/API-PenjualanApp.git`
+- `cd API-PenjualanApp`
+- `cp .env.example .env`
+- `composer install`
+- Since Lumen doesn't have the php artisan key:generate command, there's a custom route http://localhost:8000/key to help you generate an application key. Copy key to `APP_KEY`
+- `php artisan jwt:secret` and Set to your`JWT_SECRET` 
+- Copy your API KEY Rajaongkir to `RAJAONGKIR_API_KEY`
+- Set your PostgreSQL connection details 
+- `php artisan migrate --seed`
+
+## Routes List:
+
+### Authentication
+
+| HTTP Method	| Path | Action | Scope | Desciption  |
+| ----------- | ---- | ------ | ----- | ----------- |
+| `POST`      | `api/v1/auth/register` | `register` | `users:create` | `Create an user` |
+| `POST`      | `api/v1/auth/login`    | `login`    | `users:create` | `Login an user`  |
+| `POST`      | `api/v1/auth/logout`   | `logout`   | `users:delete` | `Delete an token`|
+
+### Users
+
+| HTTP Method	| Path | Action | Scope | Desciption  |
+| ----------- | ---- | ------ | ----- | ----------- |
+| `GET`       | `api/v1/account/profile`        | `profile` | `users:list`  | `Get user by auth`       |
+| `PATCH`     | `api/v1/account/profile/update` | `update`  | `users:write` | `Update an user by auth` |
+| `PATCH`     | `api/v1/account/updatepassword` | `updatePassword` | `users:write` | `Update an user password by auth` |
+| `POST`      | `api/v1/account/uploadphoto`    | `uploadPhoto`    | `users:create` | `Upload an user photo by auth` |
+
+### Product
+
+| HTTP Method	| Path | Action | Scope | Desciption  |
+| ----------- | ---- | ------ | ----- | ----------- |
+| `GET`       | `api/v1/products`     | `index` | `product:list` | `Get all product`        |
+| `GET`       | `api/v1/products/{id}`| `show`  | `product:read` | `Fetch an product by id` |
+| `GET`       | `api/v1/p/search`     | `searchDataProduct` | `product:read` | `Fetch an product by param` |
+| `POST`      | `api/v1/products`     | `store`   | `product:create` | `Create an product` |
+| `PATCH`     | `api/v1/products/{id}`| `update`  | `product:write`  | `Update an product by id` |
+| `DELETE`    | `api/v1/product/{id}` | `destroy` | `product:delete` | `Delete an product by id` |
+
+### Category
+
+| HTTP Method	| Path | Action | Scope | Desciption  |
+| ----------- | ---- | ------ | ----- | ----------- |
+| `GET`       | `api/v1/category`     | `index`  | `category:list`   | `Get all category`   |
+| `POST`      | `api/v1/category`     | `store`  | `category:create` | `Create an category` |
+| `DELETE`    | `api/v1/category/{id}`| `destroy`| `category:delete` | `Delete an category by id` |
+
+### Customer
+
+| HTTP Method	| Path | Action | Scope | Desciption  |
+| ----------- | ---- | ------ | ----- | ----------- |
+| `GET`       | `api/v1/customers`     | `index`  | `customer:list`   | `Get all customer`   |
+| `GET`       | `api/v1/customers/{id}`| `show`   | `customer:read`   | `Fetch an customer by id`|
+| `POST`      | `api/v1/customers`     | `store`  | `customer:create` | `Create an customer` |
+| `PATCH`     | `api/v1/customers/{id}`| `update` | `customer:write`  | `Update an customer by id` |
+| `DELETE`    | `api/v1/customers/{id}`| `destroy`| `customer:delete` | `Delete an customer by id` |
+
+### Supplier
+
+| HTTP Method	| Path | Action | Scope | Desciption  |
+| ----------- | ---- | ------ | ----- | ----------- |
+| `GET`       | `api/v1/suppliers`     | `index`  | `supplier:list`   | `Get all supplier`   |
+| `GET`       | `api/v1/suppliers/{id}`| `show`   | `supplier:read`   | `Fetch an supplier by id`|
+| `POST`      | `api/v1/suppliers`     | `store`  | `supplier:create` | `Create an supplier` |
+| `PATCH`     | `api/v1/suppliers/{id}`| `update` | `supplier:write`  | `Update an supplier by id` |
+| `DELETE`    | `api/v1/suppliers/{id}`| `destroy`| `supplier:delete` | `Delete an supplier by id` |
+
+### Purchase
+| HTTP Method	| Path | Action | Scope | Desciption  |
+| ----------- | ---- | ------ | ----- | ----------- |
+| `GET`       | `api/v1/purchases`     | `index`  | `purchase:list`   | `Get all purchase` |
+| `GET`       | `api/v1/purchases/{id}`| `show`   | `purchase:read`   | `Fetch an purchase by id` |
+| `POST`      | `api/v1/purchases`     | `store`  | `purchase:create` | `Create an purchase` |
+
+### Sales
+| HTTP Method	| Path | Action | Scope | Desciption  |
+| ----------- | ---- | ------ | ----- | ----------- |
+| `GET`       | `api/v1/sales`      | `index` | `sales:list`  | `Get all sales` |
+| `GET`       | `api/v1/sales/{id}` | `show`  | `sales:read`  | `Fetch an sales by id` |
+| `POST`      | `api/v1/sales`      | `store` | `sales:create`| `Create an sales` |
+
+### Report
+| HTTP Method	| Path | Action | Scope | Desciption  |
+| ----------- | ---- | ------ | ----- | ----------- |
+| `GET`       | `api/v1/purchasereport/daily` | `getDayOrderReport` | `report:list` | `Get all purchase report by param` |
+| `GET`       | `api/v1/purchasereport/monthly` | `getMonthOrderReport` | `report:list` | `Get all purchase report by param` |
+| `GET`       | `api/v1/salesreport/daily` | `getDaySalesReport` | `report:list` | `Get all sales report by param` |
+| `GET`       | `api/v1/salesreport/monthly` | `getMonthSalesReport` | `report:list` | `Get all sales report by param` |
+| `GET`       | `api/v1/stockreport/daily` | `getDayStockReport` | `report:list` | `Get all stock report by param` |
+| `GET`       | `api/v1/stockreport/monthly` | `getMonthStockReport` | `report:list` | `Get all stock report by param` |
+| `GET`       | `api/v1/mutationreport/daily` | `getDayMutationReport` | `report:list` | `Get all mutation report by param` |
+| `GET`       | `api/v1/mutationreport/monthly` | `getMonthMutationReport` | `report:list` | `Get all mutation report by param` |
 
 ## License
 
