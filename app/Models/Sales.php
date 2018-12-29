@@ -20,6 +20,6 @@ class Sales extends Model
     }
 
     public function salesdetail(){
-        return $this->hasMany('App\Models\Salesdetail', 'sales_id', 'sales_id');
+        return $this->hasMany('App\Models\SalesDetail', 'sales_id', 'sales_id');
     }
 }
