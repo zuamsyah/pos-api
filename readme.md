@@ -19,6 +19,7 @@ Penjualanapp RESTful API for Lumen micro-framework.
 - Error Handling
 - [CORS](https://github.com/barryvdh/laravel-cors) Support
 - Endpoint Tests and Unit Tests
+- Postman Collection
 - RESTful routing
 - Filter data
 - Custom respond function
@@ -32,9 +33,12 @@ Penjualanapp RESTful API for Lumen micro-framework.
 - `composer install`
 - Since Lumen doesn't have the php artisan key:generate command, there's a custom route http://localhost:8000/key to help you generate an application key. Copy key to `APP_KEY`
 - `php artisan jwt:secret` and Set to your`JWT_SECRET` 
+- Set `FORCE_HTTPS` true or false
 - Copy your API KEY Rajaongkir to `RAJAONGKIR_API_KEY`
 - Set your PostgreSQL connection details 
 - `php artisan migrate --seed`
+- `php -S localhost:8000 -t public`
+- Postman collection link https://www.getpostman.com/collections/002a7a8f9d37d4e1ecb8
 
 ## Routes List:
 
@@ -50,10 +54,10 @@ Penjualanapp RESTful API for Lumen micro-framework.
 
 | HTTP Method	| Path | Action | Scope | Desciption  |
 | ----------- | ---- | ------ | ----- | ----------- |
-| `GET`       | `api/v1/account/profile`        | `profile` | `users:list`  | `Get user by auth`       |
-| `PATCH`     | `api/v1/account/profile/update` | `update`  | `users:write` | `Update an user by auth` |
-| `PATCH`     | `api/v1/account/updatepassword` | `updatePassword` | `users:write` | `Update an user password by auth` |
-| `POST`      | `api/v1/account/uploadphoto`    | `uploadPhoto`    | `users:create` | `Upload an user photo by auth` |
+| `GET`       | `api/v1/account/profile`        | `profile` | `users:list`  | `Get user`       |
+| `PATCH`     | `api/v1/account/profile/update` | `update`  | `users:write` | `Update an user` |
+| `PATCH`     | `api/v1/account/updatepassword` | `updatePassword` | `users:write` | `Update an user password` |
+| `POST`      | `api/v1/account/uploadphoto`    | `uploadPhoto`    | `users:create` | `Upload an user photo` |
 
 ### Product
 
