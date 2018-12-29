@@ -27,7 +27,7 @@ $router->group(['prefix' => 'api/v1'], function() use ($router) {
 		//user
 		$router->get('account/profile', 'UserController@profile');
 		$router->patch('account/updatepassword', 'AuthController@updatePassword');
-        $router->patch('account/profile/update', 'UserController@update');
+        $router->patch('account/profile', 'UserController@update');
         $router->post('account/uploadphoto', 'UserController@uploadPhoto');
         $router->post('logout', 'AuthController@logout');
 		//category
@@ -60,11 +60,10 @@ $router->group(['prefix' => 'api/v1'], function() use ($router) {
 		$router->get('purchases', 'OrderController@index');
 		$router->get('purchases/{id}', 'OrderController@show');
       	$router->post('purchases', 'OrderController@store');
-		$router->patch('purchases/{id}', 'OrderController@update');
 
 		$router->get('sales', 'SalesController@index');
-      	$router->post('sales', 'SalesController@store');
-		$router->patch('sales/{id}', 'SalesController@update');
+		$router->get('sales/{id}', 'SalesController@show');
+		$router->post('sales', 'SalesController@store');
 		//report
 		$router->get('purchasereport/daily', 'ReportController@getDayOrderReport');
 		$router->get('purchasereport/monthly', 'ReportController@getMonthOrderReport');
