@@ -33,10 +33,10 @@ class CategoriesController extends Controller
         $this->categoriesTransformer = $categoriesTransformer;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $category = Auth::user()->categories()->paginate(10);
-
+		$category->setPath(url() . '/' . $request->path());
         return $this->respondWithCollection($category, $this->categoriesTransformer);
     }
 

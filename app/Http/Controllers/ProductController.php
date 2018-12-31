@@ -35,10 +35,10 @@ class ProductController extends Controller
 		$this->productTransformer = $productTransformer;
 	}
 
-	public function index()
+	public function index(Request $request)
 	{
 		$products = Auth::user()->product()->orderBy('created_at', 'DESC')->paginate(10);
-     
+		$products->setPath(url() . '/' . $request->path());
       	return $this->respondWithCollection($products, $this->productTransformer);
 	}
 

@@ -35,10 +35,10 @@ class CustomerController extends Controller
         $this->customerTransformer = $customerTransformer;
     }
 
-    public function index()
+    public function index(Request $request)
     {
       $customers = Auth::user()->customer()->paginate(10);
-     
+		  $customers->setPath(url() . '/' . $request->path());
       return $this->respondWithCollection($customers, $this->customerTransformer);
     }
 

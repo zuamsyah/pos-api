@@ -34,9 +34,10 @@ class SupplierController extends Controller
       $this->supplierTransformer = $supplierTransformer;
     }
 
-    public function index()
+    public function index(Request $request)
     {   
   	  $suppliers = Auth::user()->supplier()->paginate(10);
+      $suppliers->setPath(url() . '/' . $request->path());       
 
       return $this->respondWithCollection($suppliers, $this->supplierTransformer);
     }

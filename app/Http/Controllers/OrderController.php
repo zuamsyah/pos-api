@@ -37,10 +37,10 @@ class OrderController extends Controller
         $this->orderTransformer = $orderTransformer;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $orders = Auth::user()->Order()->orderBy('created_at', 'DESC')->paginate(10);
-     
+		$orders->setPath(url() . '/' . $request->path());        
         return $this->respondWithCollection($orders, $this->orderTransformer);
     }
 

@@ -55,7 +55,10 @@ class ReportController extends Controller
         $date = $request->get('date');
         $now = Carbon::now()->toDateString();
         $today = Auth::user()->orderdetail()->whereDate('created_at', '=', $now)->paginate(10);
+        $today->setPath(url() . '/' . $request->path());       
         $order_report = Auth::user()->orderdetail()->whereDate('created_at', '=', $date)->paginate(10);
+        $order_report->setPath(url() . '/' . $request->path());
+        
         if ($date) {
             return $this->respondWithCollection($order_report, $this->getOrderTransformer);
         } else {
@@ -70,7 +73,9 @@ class ReportController extends Controller
         $month_now = Carbon::now()->format('m');
         $year_now = Carbon::now()->format('Y');
         $today = Auth::user()->orderdetail()->whereMonth('created_at', '=', $month_now)->whereYear('created_at', '=', $year_now)->paginate(10);
+        $today->setPath(url() . '/' . $request->path());       
         $order_report = Auth::user()->orderdetail()->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->paginate(10);
+        $order_report->setPath(url() . '/' . $request->path());       
 
         if ($month) {
             if ($year) {
@@ -86,8 +91,10 @@ class ReportController extends Controller
         $date = $request->get('date');
         $now = Carbon::now()->toDateString();
         $today = Auth::user()->salesdetail()->whereDate('created_at', '=', $now)->paginate(10);
+        $today->setPath(url() . '/' . $request->path());
         $sales_report = Auth::user()->salesdetail()->whereDate('created_at', '=', $date)->paginate(10);
-     
+        $sales_report->setPath(url() . '/' . $request->path());
+        
         if ($date) {
             return $this->respondWithCollection($sales_report, $this->getSalesTransformer);
         } else {
@@ -102,8 +109,10 @@ class ReportController extends Controller
         $month_now = Carbon::now()->format('m');
         $year_now = Carbon::now()->format('Y');
         $today = Auth::user()->salesdetail()->whereMonth('created_at', '=', $month_now)->whereYear('created_at', '=', $year_now)->paginate(10);
+        $today->setPath(url() . '/' . $request->path());
         $sales_report = Auth::user()->salesdetail()->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->paginate(10);
-
+        $sales_report->setPath(url() . '/' . $request->path());
+        
         if ($month) {
             if ($year) {
                 return $this->respondWithCollection($sales_report, $this->getSalesTransformer);
@@ -118,8 +127,10 @@ class ReportController extends Controller
         $date = $request->get('date');
         $now = Carbon::now()->toDateString();
         $today = Auth::user()->Product()->whereDate('created_at', '=', $now)->paginate(10);
+        $today->setPath(url() . '/' . $request->path());
         $stock_report = Auth::user()->Product()->whereDate('created_at', '=', $date)->paginate(10);
-     
+        $stock_report->setPath(url() . '/' . $request->path());
+
         if ($date) {
             return $this->respondWithCollection($stock_report, $this->stockProductTransformer);
         } else {
@@ -132,7 +143,9 @@ class ReportController extends Controller
         $date = $request->get('date');
         $now = Carbon::now()->toDateString();
         $today = Auth::user()->Product()->whereDate('created_at', '=', $now)->paginate(10);
+        $today->setPath(url() . '/' . $request->path());       
         $stock_report = Auth::user()->Product()->whereDate('created_at', '=', $date)->paginate(10);
+        $stock_report->setPath(url() . '/' . $request->path());       
      
         if ($date) {
             return $this->respondWithCollection($stock_report, $this->stockProductTransformer);
@@ -148,7 +161,9 @@ class ReportController extends Controller
         $month_now = Carbon::now()->format('m');
         $year_now = Carbon::now()->format('Y');
         $today = Auth::user()->Product()->whereMonth('created_at', '=', $month_now)->whereYear('created_at', '=', $year_now)->paginate(10);
+        $today->setPath(url() . '/' . $request->path());       
         $stock_report = Auth::user()->Product()->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->paginate(10);
+        $stock_report->setPath(url() . '/' . $request->path());       
 
         if ($month) {
             if ($year) {
@@ -164,8 +179,10 @@ class ReportController extends Controller
         $date = $request->get('date');
         $now = Carbon::now()->toDateString();
         $today = Auth::user()->Product()->whereDate('created_at', '=', $now)->paginate(10);
+        $today->setPath(url() . '/' . $request->path());       
         $mutation_report = Auth::user()->Product()->whereDate('created_at', '=', $date)->paginate(10);
-     
+        $mutation_report->setPath(url() . '/' . $request->path());       
+        
         if ($date) {
             return $this->respondWithCollection($mutation_report, $this->mutationTransformer);
         } else {
@@ -179,8 +196,10 @@ class ReportController extends Controller
         $year = $request->get('year');
         $month_now = Carbon::now()->format('m');
         $year_now = Carbon::now()->format('Y');
+        $today->setPath(url() . '/' . $request->path());       
         $today = Auth::user()->Product()->whereMonth('created_at', '=', $month_now)->whereYear('created_at', '=', $year_now)->paginate(10);
         $mutation_report = Auth::user()->Product()->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->paginate(10);
+        $mutation_report->setPath(url() . '/' . $request->path());       
 
         if ($month) {
             if ($year) {

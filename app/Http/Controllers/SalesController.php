@@ -37,10 +37,11 @@ class SalesController extends Controller
         $this->salesTransformer = $salesTransformer;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $sales = Auth::user()->Sales()->orderBy('created_at', 'DESC')->paginate(10);
-     
+        $sales->setPath(url() . '/' . $request->path());       
+
         return $this->respondWithCollection($sales, $this->salesTransformer);
     }
 
