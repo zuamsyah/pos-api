@@ -19,6 +19,7 @@ Penjualanapp RESTful API for Lumen micro-framework.
 - Error Handling
 - [CORS](https://github.com/barryvdh/laravel-cors) Support
 - Endpoint Tests and Unit Tests
+- Postman Collection
 - RESTful routing
 - Filter data
 - Custom respond function
@@ -32,10 +33,18 @@ Penjualanapp RESTful API for Lumen micro-framework.
 - `composer install`
 - Since Lumen doesn't have the php artisan key:generate command, there's a custom route http://localhost:8000/key to help you generate an application key. Copy key to `APP_KEY`
 - `php artisan jwt:secret` and Set to your`JWT_SECRET` 
+- Set `FORCE_HTTPS` true or false
 - Copy your API KEY Rajaongkir to `RAJAONGKIR_API_KEY`
 - Set your PostgreSQL connection details 
 - `php artisan migrate --seed`
+- `php -S localhost:8000 -t public`
+- Postman collection link https://www.getpostman.com/collections/002a7a8f9d37d4e1ecb8
 
+## API Documentation
+  ### Swagger docs
+   - http://localhost:8000/docs
+  ### Postman docs
+   - https://documenter.getpostman.com/view/4436296/RznBMzh1
 ## Routes List:
 
 ### Authentication
@@ -50,21 +59,21 @@ Penjualanapp RESTful API for Lumen micro-framework.
 
 | HTTP Method	| Path | Action | Scope | Desciption  |
 | ----------- | ---- | ------ | ----- | ----------- |
-| `GET`       | `api/v1/account/profile`        | `profile` | `users:list`  | `Get user by auth`       |
-| `PATCH`     | `api/v1/account/profile/update` | `update`  | `users:write` | `Update an user by auth` |
-| `PATCH`     | `api/v1/account/updatepassword` | `updatePassword` | `users:write` | `Update an user password by auth` |
-| `POST`      | `api/v1/account/uploadphoto`    | `uploadPhoto`    | `users:create` | `Upload an user photo by auth` |
+| `GET`       | `api/v1/account/profile`        | `profile` | `users:list`  | `Get user`       |
+| `PATCH`     | `api/v1/account/profile` | `update`  | `users:write` | `Update an user` |
+| `PATCH`     | `api/v1/account/updatepassword` | `updatePassword` | `users:write` | `Update an user password` |
+| `POST`      | `api/v1/account/uploadphoto`    | `uploadPhoto`    | `users:create` | `Upload an user photo` |
 
 ### Product
 
 | HTTP Method	| Path | Action | Scope | Desciption  |
 | ----------- | ---- | ------ | ----- | ----------- |
 | `GET`       | `api/v1/products`     | `index` | `product:list` | `Get all product`        |
-| `GET`       | `api/v1/products/{id}`| `show`  | `product:read` | `Fetch an product by id` |
-| `GET`       | `api/v1/p/search`     | `searchDataProduct` | `product:read` | `Fetch an product by param` |
+| `GET`       | `api/v1/products/{product}`| `show`  | `product:read` | `Fetch an product by id` |
+| `GET`       | `api/v1/search`     | `searchDataProduct` | `product:read` | `Fetch an product by param` |
 | `POST`      | `api/v1/products`     | `store`   | `product:create` | `Create an product` |
-| `PATCH`     | `api/v1/products/{id}`| `update`  | `product:write`  | `Update an product by id` |
-| `DELETE`    | `api/v1/product/{id}` | `destroy` | `product:delete` | `Delete an product by id` |
+| `PATCH`     | `api/v1/products/{product}`| `update`  | `product:write`  | `Update an product by id` |
+| `DELETE`    | `api/v1/product/{product}` | `destroy` | `product:delete` | `Delete an product by id` |
 
 ### Category
 
@@ -72,40 +81,40 @@ Penjualanapp RESTful API for Lumen micro-framework.
 | ----------- | ---- | ------ | ----- | ----------- |
 | `GET`       | `api/v1/category`     | `index`  | `category:list`   | `Get all category`   |
 | `POST`      | `api/v1/category`     | `store`  | `category:create` | `Create an category` |
-| `DELETE`    | `api/v1/category/{id}`| `destroy`| `category:delete` | `Delete an category by id` |
+| `DELETE`    | `api/v1/category/{category}`| `destroy`| `category:delete` | `Delete an category by id` |
 
 ### Customer
 
 | HTTP Method	| Path | Action | Scope | Desciption  |
 | ----------- | ---- | ------ | ----- | ----------- |
 | `GET`       | `api/v1/customers`     | `index`  | `customer:list`   | `Get all customer`   |
-| `GET`       | `api/v1/customers/{id}`| `show`   | `customer:read`   | `Fetch an customer by id`|
+| `GET`       | `api/v1/customers/{customer}`| `show`   | `customer:read`   | `Fetch an customer by id`|
 | `POST`      | `api/v1/customers`     | `store`  | `customer:create` | `Create an customer` |
-| `PATCH`     | `api/v1/customers/{id}`| `update` | `customer:write`  | `Update an customer by id` |
-| `DELETE`    | `api/v1/customers/{id}`| `destroy`| `customer:delete` | `Delete an customer by id` |
+| `PATCH`     | `api/v1/customers/{customer}`| `update` | `customer:write`  | `Update an customer by id` |
+| `DELETE`    | `api/v1/customers/{customer}`| `destroy`| `customer:delete` | `Delete an customer by id` |
 
 ### Supplier
 
 | HTTP Method	| Path | Action | Scope | Desciption  |
 | ----------- | ---- | ------ | ----- | ----------- |
 | `GET`       | `api/v1/suppliers`     | `index`  | `supplier:list`   | `Get all supplier`   |
-| `GET`       | `api/v1/suppliers/{id}`| `show`   | `supplier:read`   | `Fetch an supplier by id`|
+| `GET`       | `api/v1/suppliers/{supplier}`| `show`   | `supplier:read`   | `Fetch an supplier by id`|
 | `POST`      | `api/v1/suppliers`     | `store`  | `supplier:create` | `Create an supplier` |
-| `PATCH`     | `api/v1/suppliers/{id}`| `update` | `supplier:write`  | `Update an supplier by id` |
-| `DELETE`    | `api/v1/suppliers/{id}`| `destroy`| `supplier:delete` | `Delete an supplier by id` |
+| `PATCH`     | `api/v1/suppliers/{supplier}`| `update` | `supplier:write`  | `Update an supplier by id` |
+| `DELETE`    | `api/v1/suppliers/{supplier}`| `destroy`| `supplier:delete` | `Delete an supplier by id` |
 
 ### Purchase
 | HTTP Method	| Path | Action | Scope | Desciption  |
 | ----------- | ---- | ------ | ----- | ----------- |
 | `GET`       | `api/v1/purchases`     | `index`  | `purchase:list`   | `Get all purchase` |
-| `GET`       | `api/v1/purchases/{id}`| `show`   | `purchase:read`   | `Fetch an purchase by id` |
+| `GET`       | `api/v1/purchases/{purchase}`| `show`   | `purchase:read`   | `Fetch an purchase by id` |
 | `POST`      | `api/v1/purchases`     | `store`  | `purchase:create` | `Create an purchase` |
 
 ### Sales
 | HTTP Method	| Path | Action | Scope | Desciption  |
 | ----------- | ---- | ------ | ----- | ----------- |
 | `GET`       | `api/v1/sales`      | `index` | `sales:list`  | `Get all sales` |
-| `GET`       | `api/v1/sales/{id}` | `show`  | `sales:read`  | `Fetch an sales by id` |
+| `GET`       | `api/v1/sales/{sale}` | `show`  | `sales:read`  | `Fetch an sales by id` |
 | `POST`      | `api/v1/sales`      | `store` | `sales:create`| `Create an sales` |
 
 ### Report
