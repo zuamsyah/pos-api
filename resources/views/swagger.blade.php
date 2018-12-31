@@ -38,6 +38,8 @@
     <script>
       window.onload = function() {
         // Get current host
+          //for localhost
+          //host = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
           host = location.protocol+'//'+location.hostname;
         // Build a system
         const ui = SwaggerUIBundle({
