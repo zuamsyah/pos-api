@@ -32,8 +32,7 @@ Penjualanapp RESTful API for Lumen micro-framework.
 - `cp .env.example .env`
 - `composer install`
 - Since Lumen doesn't have the php artisan key:generate command, there's a custom route http://localhost:8000/key to help you generate an application key. Copy key to `APP_KEY`
-- `php artisan jwt:secret` and Set to your`JWT_SECRET` 
-- Set `FORCE_HTTPS` true or false
+- `php artisan jwt:secret` and Set to your`JWT_SECRET`
 - Copy your API KEY Rajaongkir to `RAJAONGKIR_API_KEY`
 - Set your PostgreSQL connection details 
 - `php artisan migrate --seed`
@@ -42,7 +41,7 @@ Penjualanapp RESTful API for Lumen micro-framework.
 
 ## API Documentation
   ### Swagger docs
-   - http://localhost:8000/docs
+   - https://penjualanapp-api.herokuapp.com/swagger
   ### Postman docs
    - https://documenter.getpostman.com/view/4436296/RznBMzh1
 ## Routes List:
