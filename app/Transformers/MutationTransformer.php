@@ -19,7 +19,9 @@ class MutationTransformer extends TransformerAbstract
             'first_balance' => $product->first_stock * $product->buy_price,
             'value_in' => $product->stock_in * $product->buy_price,
             'value_out' => $product->stock_out * $product->sell_price,
-            'total_balance' => ($product->first_stock * $product->buy_price) + ($product->stock_in * $product->buy_price) - ($product->stock_out * $product->sell_price)
+            'total_balance' => ($product->first_stock * $product->buy_price) + ($product->stock_in * $product->buy_price) - ($product->stock_out * $product->sell_price),
+            'created_at' => (string) $product->created_at,
+            'updated_at' => (string) $product->updated_at,
         ];
     }
 }
