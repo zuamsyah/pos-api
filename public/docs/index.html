@@ -37,11 +37,9 @@
     <script src="./swagger-ui-standalone-preset.js"> </script>
     <script>
       window.onload = function() {
-        // Get current host
-          host = 'https://'+location.hostname;
         // Build a system
         const ui = SwaggerUIBundle({
-          url: host + "/docs/api-docs.json",
+          url: "https://penjualanapp-api.herokuapp.com/docs/api-docs.json",
           dom_id: '#swagger-ui',
           presets: [
             SwaggerUIBundle.presets.apis,

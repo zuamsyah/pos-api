@@ -15,8 +15,8 @@
   },
   "basePath": "/api/v1",
   "schemes": [
-    "https",
-    "http"
+    "http",
+    "https"
   ],
   "produces": [
     "application/json"
