@@ -37,7 +37,7 @@ $router->group(['prefix' => 'api/v1'], function() use ($router) {
 		//product
 	    $router->get('products', 'ProductController@index');
       	$router->get('products/{id}', 'ProductController@show');
-      	$router->get('p/search', 'ProductController@searchDataProduct');
+      	$router->get('search', 'ProductController@searchDataProduct');
 		$router->post('products', 'ProductController@store');
 		$router->patch('products/{id}', 'ProductController@update');
       	$router->delete('products/{id}', 'ProductController@destroy');
