@@ -11,7 +11,7 @@ class GetSalesTransformer extends TransformerAbstract
     {
         return [
         	'id' => $salesdetail->id,
-            'order_id' => $salesdetail->sales_id,
+            'sales_id' => $salesdetail->sales_id,
             'product_code' => $salesdetail->product_code,
             'product_name' => $salesdetail->product()->get()->first()->product_name,
             'customer_name' => $salesdetail->sales->customer()->get()->first()->name,
