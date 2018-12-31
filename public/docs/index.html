@@ -38,10 +38,10 @@
     <script>
       window.onload = function() {
         // Get current host
-          host = location.protocol+'//'+location.hostname;
+          host = window.location.hostname;
         // Build a system
         const ui = SwaggerUIBundle({
-          url: host + "/api-docs.json",
+          url: host + "/docs/api-docs.json",
           dom_id: '#swagger-ui',
           presets: [
             SwaggerUIBundle.presets.apis,
