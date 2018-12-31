@@ -32,9 +32,6 @@ $app->withEloquent();
 $app->configure('cors');
 $app->configure('rajaongkir');
 
-$app->configure('swagger-lume'); 
-$app->register(\SwaggerLume\ServiceProvider::class);
-
 if (env('APP_ENV') !== 'local') {
     URL::forceScheme('https');
 }
