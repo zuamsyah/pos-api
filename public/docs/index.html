@@ -38,7 +38,7 @@
     <script>
       window.onload = function() {
         // Get current host
-          host = window.location.protocol + window.location.hostname;
+          host = location.protocol+'//'+location.hostname;
         // Build a system
         const ui = SwaggerUIBundle({
           url: host + "/docs/api-docs.json",
