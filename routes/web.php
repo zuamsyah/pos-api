@@ -20,6 +20,10 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->get('/swagger', function() use ($router) {
+    return view('swagger');
+});
+
 $router->group(['prefix' => 'api/v1'], function() use ($router) {
 	$router->post('auth/login', 'AuthController@login');
 	$router->post('auth/register', 'AuthController@register');
