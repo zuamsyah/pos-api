@@ -103,8 +103,8 @@ class AuthController extends Controller
         $user = User::find(Auth::id());
         $this->validate($request,[
             'old_password' => 'required',
-            'new_password' => 'required|min:6',
-            'confirm_password' => 'required|same:new_password'
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|same:password'
         ]);
         
         if (!Hash::check($data['old_password'], $user->password)) {
@@ -112,12 +112,11 @@ class AuthController extends Controller
                 'success' => false, 
                 'message' => 'The specified password does not match the database password'
             ],406);
-        } else {
-            Auth::user()->update($request->only(['password']));
+        } else if (Auth::user()->update($request->only(['password']))) {
             return response()->json([
-                        'message' => 'You are changed your password successful',
-                        'code' => 200,
-                    ],200);
+                'message' => 'You are changed your password successful',
+                'code' => 200,
+            ],200);
         }
     }
 }
