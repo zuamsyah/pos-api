@@ -32,10 +32,13 @@ $app->withEloquent();
 $app->configure('cors');
 $app->configure('rajaongkir');
 
-if(env('FORCE_HTTPS'))
-{
+$app->configure('swagger-lume'); 
+$app->register(\SwaggerLume\ServiceProvider::class);
+
+if (env('APP_ENV') !== 'local') {
     URL::forceScheme('https');
 }
+
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
