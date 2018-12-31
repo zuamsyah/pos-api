@@ -21,7 +21,8 @@ class CategoriesTableSeeder extends Seeder
     		['category_name' => 'Kamera', 'user_id' => 1,],
     		['category_name' => 'Sepeda', 'user_id' => 1,],
     		['category_name' => 'Mobil', 'user_id' => 1,],
-    		['category_name' => 'Buku', 'user_id' => 1,],
+			['category_name' => 'Buku', 'user_id' => 1,],
+			['category_name' => 'Susu', 'user_id' => 1,],
     	]);
     }
 }
