@@ -196,8 +196,8 @@ class ReportController extends Controller
         $year = $request->get('year');
         $month_now = Carbon::now()->format('m');
         $year_now = Carbon::now()->format('Y');
-        $today->setPath(url() . '/' . $request->path());       
         $today = Auth::user()->Product()->whereMonth('created_at', '=', $month_now)->whereYear('created_at', '=', $year_now)->paginate(10);
+        $today->setPath(url() . '/' . $request->path());       
         $mutation_report = Auth::user()->Product()->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->paginate(10);
         $mutation_report->setPath(url() . '/' . $request->path());       
 
