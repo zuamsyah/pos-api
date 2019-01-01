@@ -44,6 +44,7 @@ Penjualanapp RESTful API for Lumen micro-framework.
    - https://penjualanapp-api.herokuapp.com/swagger
   ### Postman docs
    - https://documenter.getpostman.com/view/4436296/RznBMzh1
+
 ## Routes List:
 
 ### Authentication
@@ -101,6 +102,12 @@ Penjualanapp RESTful API for Lumen micro-framework.
 | `POST`      | `api/v1/suppliers`     | `store`  | `supplier:create` | `Create an supplier` |
 | `PATCH`     | `api/v1/suppliers/{supplier}`| `update` | `supplier:write`  | `Update an supplier by id` |
 | `DELETE`    | `api/v1/suppliers/{supplier}`| `destroy`| `supplier:delete` | `Delete an supplier by id` |
+
+### City
+
+| HTTP Method	| Path | Action | Scope | Desciption  |
+| ----------- | ---- | ------ | ----- | ----------- |
+| `GET`       | `api/v1/cities` | `allCity` | `city:list` | `Get all city` |
 
 ### Purchase
 | HTTP Method	| Path | Action | Scope | Desciption  |
