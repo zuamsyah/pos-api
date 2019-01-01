@@ -25,6 +25,14 @@ Penjualanapp RESTful API for Lumen micro-framework.
 - Custom respond function
 - PostgreSQL Database
 
+## Requirements
+
+- PostgreSQL
+- PHP 7.2
+- Composer
+- Apache service
+- Postman
+
 ## Installation
 
 - `git clone https://github.com/zuams/API-PenjualanApp.git`
