@@ -28,7 +28,8 @@ Penjualanapp RESTful API for Lumen micro-framework.
 ## Requirements
 
 - PostgreSQL
-- PHP 7.2
+- PDO Driver PGSQL
+- PHP >=7.2
 - Composer
 - Apache service
 - Postman
