@@ -37,7 +37,7 @@ class CustomerController extends Controller
 
     public function index(Request $request)
     {
-      $customers = Auth::user()->customer()->paginate(10);
+      $customers = Auth::user()->customer()->orderBy('created_at', 'ASC')->paginate(10);
 		  $customers->setPath(url() . '/' . $request->path());
       return $this->respondWithCollection($customers, $this->customerTransformer);
     }

@@ -36,7 +36,7 @@ class SupplierController extends Controller
 
     public function index(Request $request)
     {   
-  	  $suppliers = Auth::user()->supplier()->paginate(10);
+  	  $suppliers = Auth::user()->supplier()->orderBy('created_at', 'ASC')->paginate(10);
       $suppliers->setPath(url() . '/' . $request->path());       
 
       return $this->respondWithCollection($suppliers, $this->supplierTransformer);

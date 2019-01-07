@@ -35,7 +35,7 @@ class CategoriesController extends Controller
 
     public function index(Request $request)
     {
-        $category = Auth::user()->categories()->paginate(10);
+        $category = Auth::user()->categories()->orderBy('category_id', 'ASC')->paginate(10);
 		$category->setPath(url() . '/' . $request->path());
         return $this->respondWithCollection($category, $this->categoriesTransformer);
     }
