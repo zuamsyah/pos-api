@@ -8,7 +8,7 @@
 
 Point of sales app, build with Lumen micro-framework.
 
-live preview 👇
+live preview
 - frontend 
  https://rupiah-id.herokuapp.com
 - backend
