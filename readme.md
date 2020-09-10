@@ -6,7 +6,13 @@
 [![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
 [![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
 
-Penjualanapp RESTful API for Lumen micro-framework.
+Point of sales app, build with Lumen micro-framework.
+
+live preview 👇
+- frontend 
+ https://rupiah-id.herokuapp.com
+- backend
+  https://penjualanapp-api.herokuapp.com
 
 ## Features
 
@@ -36,8 +42,8 @@ Penjualanapp RESTful API for Lumen micro-framework.
 
 ## Installation
 
-- `git clone https://github.com/zuams/API-PenjualanApp.git`
-- `cd API-PenjualanApp`
+- `git clone https://github.com/zuams/api-rupiah.id.git`
+- `cd api-rupiah.id`
 - `cp .env.example .env`
 - `composer install`
 - Since Lumen doesn't have the php artisan key:generate command, there's a custom route http://localhost:8000/key to help you generate an application key. Copy key to `APP_KEY`
