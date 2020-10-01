@@ -16,13 +16,13 @@ live preview
 
 ## Features
 
-- Validation
-- JWT Authentication
-- Models with proper relationships
+- Validation (Validasi)
+- JWT Authentication (JWT Authentikasi)
+- Models with proper relationships (Model dengan hubungan yang tepat)
 - API Response with [Fractal](http://fractal.thephpleague.com/)
-- Pagination
-- Seeding Database
-- Error Handling
+- Pagination (Paginasi)
+- Seeding Database 
+- Error Handling (Penanganan Error)
 - [CORS](https://github.com/barryvdh/laravel-cors) Support
 - Endpoint Tests and Unit Tests
 - Postman Collection
@@ -40,7 +40,7 @@ live preview
 - Apache service
 - Postman
 
-## Installation
+## Installation (Cara Instalasi)
 
 - `git clone https://github.com/zuams/api-rupiah.id.git`
 - `cd api-rupiah.id`
